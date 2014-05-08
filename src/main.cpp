@@ -8,11 +8,18 @@
 
 #include <iostream>
 #include <QtGui/QApplication>
-#include "cell.h"
+#include "grid.h"
 
-int main(int argc, char * argv[])
+int main()
 {
-    QApplication app(argc, argv);
+    Grid g;
+    g.print();
 
-    return app.exec();
+    while (getchar() != 27)
+    {
+        g.next_state();
+        g.print();
+    }
+
+    return 0;
 }
