@@ -87,3 +87,35 @@ void Grid::print()
 
     std::cout << std::endl;
 }
+
+void Grid::paintEvent(QPaintEvent*)
+{
+    QPainter painter(this);
+
+    for (int i = 1; i < Grid::kgrid_size; ++i)
+    {
+        painter.fillRect(Grid::kcell_size * i - 1, 0,
+                         1, kwindows_size, Qt::black);
+    }
+
+    for (int j = 1; j < Grid::kgrid_size; ++j)
+    {
+        painter.fillRect(0, Grid::kcell_size * j - 1,
+                         kwindows_size, 1, Qt::black);
+    }
+
+    for (int j = 0; j < Grid::kgrid_size; ++j)
+    {
+        for (int i = 0; i < Grid::kgrid_size; ++i)
+        {
+            paint_cell(painter, i, j);
+        }
+    }
+}
+
+void Grid::paint_cell(QPainter& painter, int i, int j)
+{
+    painter.fillRect(kcell_size * i, kcell_size * j,
+                     kcell_size - 1, kcell_size - 1,
+                     Qt::gray);
+}

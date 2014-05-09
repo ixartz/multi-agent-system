@@ -26,6 +26,8 @@ public:
     Grid();
     void next_state();
     void print();
+    void paintEvent(QPaintEvent*);
+    void paint_cell(QPainter& painter, int i, int j);
 
 private:
     void calculate_neighbour(Cell& c, int x, int y);
