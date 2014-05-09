@@ -18,6 +18,11 @@ Grid::Grid()
             grid_[j].push_back(Cell());
         }
     }
+
+    setFixedSize(Grid::kwindows_size,
+                 Grid::kwindows_size);
+
+    show();
 }
 
 void Grid::next_state()
@@ -79,6 +84,6 @@ void Grid::print()
 
         std::cout << std::endl;
     }
-    
+
     std::cout << std::endl;
 }

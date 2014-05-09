@@ -11,9 +11,12 @@
 
 #include <iostream>
 #include <vector>
+#include <QWidget>
+#include <QPaintEvent>
+#include <QPainter>
 #include "cell.h"
 
-class Grid
+class Grid : public QWidget
 {
 public:
     static constexpr unsigned short kgrid_size = 30;

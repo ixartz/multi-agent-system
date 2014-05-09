@@ -5,12 +5,10 @@ file(GLOB source
      "*.cpp"
 )
 
-find_package(Qt4 COMPONENTS QtCore QtGui REQUIRED)
-include(${QT_USE_FILE})
-include_directories(${Qt4_INCLUDES})
-add_definitions(${Qt4_DEFINITIONS})
+set(CMAKE_AUTOMOC ON)
+set(CMAKE_INCLUDE_CURRENT_DIR ON)
+
+find_package(Qt5Widgets)
 
 add_executable(multi ${source})
-target_link_libraries(multi ${Qt4_LIBRARIES})
-qt4_use_modules(multi Core)
-qt4_use_modules(multi Gui)
+qt5_use_modules(multi Widgets)

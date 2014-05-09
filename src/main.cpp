@@ -7,19 +7,14 @@
 //
 
 #include <iostream>
-#include <QtGui/QApplication>
+#include <QApplication>
 #include "grid.h"
 
-int main()
+int main(int argc, char* argv[])
 {
-    Grid g;
-    g.print();
+    QApplication app(argc, argv);
 
-    while (getchar() != 27)
-    {
-        g.next_state();
-        g.print();
-    }
+    Grid s;
 
-    return 0;
+    return app.exec();
 }
