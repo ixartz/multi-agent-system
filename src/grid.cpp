@@ -108,14 +108,41 @@ void Grid::paintEvent(QPaintEvent*)
     {
         for (int i = 0; i < Grid::kgrid_size; ++i)
         {
-            paint_cell(painter, i, j);
+            if (grid_[j][i].get_state() == Cell::alive)
+                paint_cell(painter, i, j, Qt::green);
+            else
+                paint_cell(painter, i, j, Qt::darkGreen);
         }
     }
 }
 
-void Grid::paint_cell(QPainter& painter, int i, int j)
+void Grid::keyPressEvent(QKeyEvent* event)
+{
+    if (event->key() == Qt::Key_Escape)
+    {
+        QCoreApplication::exit();
+    }
+    else
+    {
+        next_state();
+        update();
+    }
+}
+
+void Grid::mousePressEvent(QMouseEvent* event)
+{
+    if (event->buttons() == Qt::LeftButton)
+    {
+        int i = event->pos().x() / kcell_size;
+        int j = event->pos().y() / kcell_size;
+        grid_[j][i].inverse_state();
+        update();
+    }
+}
+
+void Grid::paint_cell(QPainter& painter, int i, int j, Qt::GlobalColor c)
 {
     painter.fillRect(kcell_size * i, kcell_size * j,
                      kcell_size - 1, kcell_size - 1,
-                     Qt::gray);
+                     c);
 }

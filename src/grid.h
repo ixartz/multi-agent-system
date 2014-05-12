@@ -12,8 +12,10 @@
 #include <iostream>
 #include <vector>
 #include <QWidget>
+#include <QKeyEvent>
 #include <QPaintEvent>
 #include <QPainter>
+#include <QApplication>
 #include "cell.h"
 
 class Grid : public QWidget
@@ -27,7 +29,9 @@ public:
     void next_state();
     void print();
     void paintEvent(QPaintEvent*);
-    void paint_cell(QPainter& painter, int i, int j);
+    void keyPressEvent(QKeyEvent* event);
+    void mousePressEvent(QMouseEvent* event);
+    void paint_cell(QPainter& painter, int i, int j, Qt::GlobalColor c);
 
 private:
     void calculate_neighbour(Cell& c, int x, int y);

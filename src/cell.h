@@ -22,6 +22,7 @@ public:
     };
 
     Cell();
+    void inverse_state();
     void change_state();
     std::vector<Cell::state>& get_neighbor();
     Cell::state get_state();

@@ -16,6 +16,14 @@ Cell::Cell()
         state_ = dead;
 }
 
+void Cell::inverse_state()
+{
+    if (state_ == alive)
+        state_ = dead;
+    else
+        state_ = alive;
+}
+
 void Cell::change_state()
 {
     long nb = count(neighbor_.begin(), neighbor_.end(), alive);
