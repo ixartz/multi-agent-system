@@ -13,13 +13,14 @@
 #include <QWidget>
 #include <QPushButton>
 #include <QVBoxLayout>
-#include "cellular/grid.h"
+#include "cellular/grid_cellular.h"
 
 class Menu : public QWidget
 {
     Q_OBJECT
 public:
     Menu();
+    void keyPressEvent(QKeyEvent* event);
 
 public slots:
     void handle_cellular();
@@ -27,7 +28,7 @@ public slots:
 private:
     QPushButton b_;
     QVBoxLayout layout_;
-    Grid g_;
+    GridCellular g_;
 };
 
 #endif /* defined(__multi_agent_system__menu__) */

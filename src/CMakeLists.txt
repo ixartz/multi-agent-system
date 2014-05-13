@@ -23,8 +23,10 @@ set(CMAKE_AUTOMOC ON)
 add_dir("." source)
 add_dir("base" source_base)
 add_dir("cellular" source_cellular)
+add_dir("animal" source_animal)
 
 find_package(Qt5Widgets)
 
-add_executable(multi ${source} ${source_base} ${source_cellular})
+add_executable(multi ${source} ${source_base}
+               ${source_cellular} ${source_animal})
 qt5_use_modules(multi Widgets)

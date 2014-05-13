@@ -6,43 +6,43 @@
 //
 //
 
-#include "grid.h"
+#include "grid_cellular.h"
 
-Grid::Grid()
-    : grid_(Grid::kgrid_size)
+GridCellular::GridCellular()
+    : grid_(GridCellular::kgrid_size)
 {
-    for (int j = 0; j < Grid::kgrid_size; ++j)
+    for (int j = 0; j < GridCellular::kgrid_size; ++j)
     {
-        for (int i = 0; i < Grid::kgrid_size; ++i)
+        for (int i = 0; i < GridCellular::kgrid_size; ++i)
         {
             grid_[j].push_back(Cell());
         }
     }
 
-    setFixedSize(Grid::kwindows_size,
-                 Grid::kwindows_size);
+    setFixedSize(GridCellular::kwindows_size,
+                 GridCellular::kwindows_size);
 }
 
-void Grid::next_state()
+void GridCellular::next_state()
 {
-    for (int j = 0; j < Grid::kgrid_size; ++j)
+    for (int j = 0; j < GridCellular::kgrid_size; ++j)
     {
-        for (int i = 0; i < Grid::kgrid_size; ++i)
+        for (int i = 0; i < GridCellular::kgrid_size; ++i)
         {
             calculate_neighbour(grid_[j][i], i, j);
         }
     }
 
-    for (int j = 0; j < Grid::kgrid_size; ++j)
+    for (int j = 0; j < GridCellular::kgrid_size; ++j)
     {
-        for (int i = 0; i < Grid::kgrid_size; ++i)
+        for (int i = 0; i < GridCellular::kgrid_size; ++i)
         {
             grid_[j][i].change_state();
         }
     }
 }
 
-void Grid::calculate_neighbour(Cell& c, int x, int y)
+void GridCellular::calculate_neighbour(Cell& c, int x, int y)
 {
     c.get_neighbor().clear();
 
@@ -51,8 +51,8 @@ void Grid::calculate_neighbour(Cell& c, int x, int y)
         for (int i = -1; i <= 1; ++i)
         {
             if ((j != 0 || i != 0) &&
-                (x + i >= 0 && x + i < Grid::kgrid_size &&
-                 y + j >= 0 && y + j < Grid::kgrid_size))
+                (x + i >= 0 && x + i < GridCellular::kgrid_size &&
+                 y + j >= 0 && y + j < GridCellular::kgrid_size))
             {
                 c.get_neighbor().push_back(grid_[y + j][x + i].get_state());
             }
@@ -60,13 +60,13 @@ void Grid::calculate_neighbour(Cell& c, int x, int y)
     }
 }
 
-void Grid::print()
+void GridCellular::print()
 {
-    for (int j = 0; j < Grid::kgrid_size; ++j)
+    for (int j = 0; j < GridCellular::kgrid_size; ++j)
     {
         std::cout << "|";
 
-        for (int i = 0; i < Grid::kgrid_size; ++i)
+        for (int i = 0; i < GridCellular::kgrid_size; ++i)
         {
             if (grid_[j][i].get_state() == Cell::alive)
             {
@@ -86,25 +86,25 @@ void Grid::print()
     std::cout << std::endl;
 }
 
-void Grid::paintEvent(QPaintEvent*)
+void GridCellular::paintEvent(QPaintEvent*)
 {
     QPainter painter(this);
 
-    for (int i = 1; i < Grid::kgrid_size; ++i)
+    for (int i = 1; i < GridCellular::kgrid_size; ++i)
     {
-        painter.fillRect(Grid::kcell_size * i - 1, 0,
+        painter.fillRect(GridCellular::kcell_size * i - 1, 0,
                          1, kwindows_size, Qt::black);
     }
 
-    for (int j = 1; j < Grid::kgrid_size; ++j)
+    for (int j = 1; j < GridCellular::kgrid_size; ++j)
     {
-        painter.fillRect(0, Grid::kcell_size * j - 1,
+        painter.fillRect(0, GridCellular::kcell_size * j - 1,
                          kwindows_size, 1, Qt::black);
     }
 
-    for (int j = 0; j < Grid::kgrid_size; ++j)
+    for (int j = 0; j < GridCellular::kgrid_size; ++j)
     {
-        for (int i = 0; i < Grid::kgrid_size; ++i)
+        for (int i = 0; i < GridCellular::kgrid_size; ++i)
         {
             if (grid_[j][i].get_state() == Cell::alive)
                 paint_cell(painter, i, j, Qt::green);
@@ -114,11 +114,11 @@ void Grid::paintEvent(QPaintEvent*)
     }
 }
 
-void Grid::keyPressEvent(QKeyEvent* event)
+void GridCellular::keyPressEvent(QKeyEvent* event)
 {
     if (event->key() == Qt::Key_Escape)
     {
-        QCoreApplication::exit();
+        close();
     }
     else
     {
@@ -127,7 +127,7 @@ void Grid::keyPressEvent(QKeyEvent* event)
     }
 }
 
-void Grid::mousePressEvent(QMouseEvent* event)
+void GridCellular::mousePressEvent(QMouseEvent* event)
 {
     if (event->buttons() == Qt::LeftButton)
     {
@@ -138,7 +138,7 @@ void Grid::mousePressEvent(QMouseEvent* event)
     }
 }
 
-void Grid::paint_cell(QPainter& painter, int i, int j, Qt::GlobalColor c)
+void GridCellular::paint_cell(QPainter& painter, int i, int j, Qt::GlobalColor c)
 {
     painter.fillRect(kcell_size * i, kcell_size * j,
                      kcell_size - 1, kcell_size - 1,

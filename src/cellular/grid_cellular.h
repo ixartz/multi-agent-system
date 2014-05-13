@@ -18,14 +18,14 @@
 #include <QApplication>
 #include "cell.h"
 
-class Grid : public QWidget
+class GridCellular : public QWidget
 {
 public:
     static constexpr unsigned short kgrid_size = 30;
     static constexpr unsigned short kcell_size = 25;
     static constexpr unsigned short kwindows_size = kgrid_size * kcell_size;
 
-    Grid();
+    GridCellular();
     void next_state();
     void print();
     void paintEvent(QPaintEvent*);

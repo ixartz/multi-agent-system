@@ -21,6 +21,14 @@ Menu::Menu()
     setLayout(&layout_);
 }
 
+void Menu::keyPressEvent(QKeyEvent* event)
+{
+    if (event->key() == Qt::Key_Escape)
+    {
+        QCoreApplication::exit();
+    }
+}
+
 void Menu::handle_cellular()
 {
     g_.show();
