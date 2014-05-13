@@ -13,6 +13,7 @@
 #include <QWidget>
 #include <QPushButton>
 #include <QVBoxLayout>
+#include <QApplication>
 #include "cellular/grid_cellular.h"
 
 class Menu : public QWidget

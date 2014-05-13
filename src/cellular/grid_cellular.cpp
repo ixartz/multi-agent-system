@@ -11,31 +11,31 @@
 GridCellular::GridCellular()
     : grid_(GridCellular::kgrid_size)
 {
-    for (int j = 0; j < GridCellular::kgrid_size; ++j)
+    for (int j = 0; j < get_kgrid_size(); ++j)
     {
-        for (int i = 0; i < GridCellular::kgrid_size; ++i)
+        for (int i = 0; i < get_kgrid_size(); ++i)
         {
             grid_[j].push_back(Cell());
         }
     }
 
-    setFixedSize(GridCellular::kwindows_size,
-                 GridCellular::kwindows_size);
+    setFixedSize(get_kwindows_size(),
+                 get_kwindows_size());
 }
 
 void GridCellular::next_state()
 {
-    for (int j = 0; j < GridCellular::kgrid_size; ++j)
+    for (int j = 0; j < get_kgrid_size(); ++j)
     {
-        for (int i = 0; i < GridCellular::kgrid_size; ++i)
+        for (int i = 0; i < get_kgrid_size(); ++i)
         {
             calculate_neighbour(grid_[j][i], i, j);
         }
     }
 
-    for (int j = 0; j < GridCellular::kgrid_size; ++j)
+    for (int j = 0; j < get_kgrid_size(); ++j)
     {
-        for (int i = 0; i < GridCellular::kgrid_size; ++i)
+        for (int i = 0; i < get_kgrid_size(); ++i)
         {
             grid_[j][i].change_state();
         }
@@ -51,8 +51,8 @@ void GridCellular::calculate_neighbour(Cell& c, int x, int y)
         for (int i = -1; i <= 1; ++i)
         {
             if ((j != 0 || i != 0) &&
-                (x + i >= 0 && x + i < GridCellular::kgrid_size &&
-                 y + j >= 0 && y + j < GridCellular::kgrid_size))
+                (x + i >= 0 && x + i < get_kgrid_size() &&
+                 y + j >= 0 && y + j < get_kgrid_size()))
             {
                 c.get_neighbor().push_back(grid_[y + j][x + i].get_state());
             }
@@ -62,11 +62,11 @@ void GridCellular::calculate_neighbour(Cell& c, int x, int y)
 
 void GridCellular::print()
 {
-    for (int j = 0; j < GridCellular::kgrid_size; ++j)
+    for (int j = 0; j < get_kgrid_size(); ++j)
     {
         std::cout << "|";
 
-        for (int i = 0; i < GridCellular::kgrid_size; ++i)
+        for (int i = 0; i < get_kgrid_size(); ++i)
         {
             if (grid_[j][i].get_state() == Cell::alive)
             {
@@ -90,21 +90,21 @@ void GridCellular::paintEvent(QPaintEvent*)
 {
     QPainter painter(this);
 
-    for (int i = 1; i < GridCellular::kgrid_size; ++i)
+    for (int i = 1; i < get_kgrid_size(); ++i)
     {
         painter.fillRect(GridCellular::kcell_size * i - 1, 0,
-                         1, kwindows_size, Qt::black);
+                         1, get_kwindows_size(), Qt::black);
     }
 
-    for (int j = 1; j < GridCellular::kgrid_size; ++j)
+    for (int j = 1; j < get_kgrid_size(); ++j)
     {
         painter.fillRect(0, GridCellular::kcell_size * j - 1,
-                         kwindows_size, 1, Qt::black);
+                         get_kwindows_size(), 1, Qt::black);
     }
 
-    for (int j = 0; j < GridCellular::kgrid_size; ++j)
+    for (int j = 0; j < get_kgrid_size(); ++j)
     {
-        for (int i = 0; i < GridCellular::kgrid_size; ++i)
+        for (int i = 0; i < get_kgrid_size(); ++i)
         {
             if (grid_[j][i].get_state() == Cell::alive)
                 paint_cell(painter, i, j, Qt::green);
@@ -116,11 +116,9 @@ void GridCellular::paintEvent(QPaintEvent*)
 
 void GridCellular::keyPressEvent(QKeyEvent* event)
 {
-    if (event->key() == Qt::Key_Escape)
-    {
-        close();
-    }
-    else
+    Grid::keyPressEvent(event);
+
+    if (event->key() != Qt::Key_Escape)
     {
         next_state();
         update();
@@ -138,9 +136,17 @@ void GridCellular::mousePressEvent(QMouseEvent* event)
     }
 }
 
-void GridCellular::paint_cell(QPainter& painter, int i, int j, Qt::GlobalColor c)
+unsigned short GridCellular::get_kgrid_size()
 {
-    painter.fillRect(kcell_size * i, kcell_size * j,
-                     kcell_size - 1, kcell_size - 1,
-                     c);
+    return kgrid_size;
+}
+
+unsigned short GridCellular::get_kcell_size()
+{
+    return kcell_size;
+}
+
+unsigned short GridCellular::get_kwindows_size()
+{
+    return kgrid_size * kcell_size;
 }

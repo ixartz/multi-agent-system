@@ -6,36 +6,34 @@
 //
 //
 
-#ifndef __multi_agent_system__grid__
-#define __multi_agent_system__grid__
+#ifndef __multi_agent_system__grid_cellular__
+#define __multi_agent_system__grid_cellular__
 
 #include <iostream>
 #include <vector>
-#include <QWidget>
-#include <QKeyEvent>
-#include <QPaintEvent>
-#include <QPainter>
-#include <QApplication>
+#include "base/grid.h"
 #include "cell.h"
 
-class GridCellular : public QWidget
+class GridCellular : public Grid
 {
 public:
-    static constexpr unsigned short kgrid_size = 30;
-    static constexpr unsigned short kcell_size = 25;
-    static constexpr unsigned short kwindows_size = kgrid_size * kcell_size;
-
     GridCellular();
     void next_state();
     void print();
-    void paintEvent(QPaintEvent*);
-    void keyPressEvent(QKeyEvent* event);
+    virtual void paintEvent(QPaintEvent*);
+    virtual void keyPressEvent(QKeyEvent* event);
     void mousePressEvent(QMouseEvent* event);
-    void paint_cell(QPainter& painter, int i, int j, Qt::GlobalColor c);
+
+    virtual unsigned short get_kgrid_size();
+    virtual unsigned short get_kcell_size();
+    virtual unsigned short get_kwindows_size();
 
 private:
+    static constexpr unsigned short kgrid_size = 30;
+    static constexpr unsigned short kcell_size = 25;
+
     void calculate_neighbour(Cell& c, int x, int y);
     std::vector<std::vector<Cell>> grid_;
 };
 
-#endif /* defined(__multi_agent_system__grid__) */
+#endif /* defined(__multi_agent_system__grid_cellular__) */

@@ -10,6 +10,8 @@
 #define __multi_agent_system__grid_animal__
 
 #include <iostream>
+#include <QPaintEvent>
+#include <QPainter>
 #include "base/grid.h"
 
 class GridAnimal : public Grid

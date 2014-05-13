@@ -25,7 +25,7 @@ void Menu::keyPressEvent(QKeyEvent* event)
 {
     if (event->key() == Qt::Key_Escape)
     {
-        QCoreApplication::exit();
+        QApplication::exit();
     }
 }
 
