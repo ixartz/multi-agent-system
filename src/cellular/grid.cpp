@@ -21,8 +21,6 @@ Grid::Grid()
 
     setFixedSize(Grid::kwindows_size,
                  Grid::kwindows_size);
-
-    show();
 }
 
 void Grid::next_state()

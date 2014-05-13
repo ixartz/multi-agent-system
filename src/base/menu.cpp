@@ -7,3 +7,21 @@
 //
 
 #include "menu.h"
+
+Menu::Menu()
+    : b_(this)
+{
+    setFixedSize(150, 150);
+    show();
+
+    b_.setText("Cellular");
+    QObject::connect(&b_, SIGNAL(pressed()), this, SLOT(handle_cellular()));
+    layout_.addWidget(&b_);
+
+    setLayout(&layout_);
+}
+
+void Menu::handle_cellular()
+{
+    g_.show();
+}

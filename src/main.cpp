@@ -8,13 +8,13 @@
 
 #include <iostream>
 #include <QApplication>
-#include "grid.h"
+#include "base/menu.h"
 
 int main(int argc, char* argv[])
 {
     QApplication app(argc, argv);
 
-    Grid s;
+    Menu m;
 
     return app.exec();
 }
