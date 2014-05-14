@@ -32,7 +32,7 @@ private:
     static constexpr unsigned short kgrid_size = 30;
     static constexpr unsigned short kcell_size = 25;
 
-    void calculate_neighbour(Cell& c, int x, int y);
+    void calculate_neighbour_(Cell& c, int x, int y);
     std::vector<std::vector<Cell>> grid_;
 };
 

@@ -21,6 +21,7 @@ public:
     virtual void paintEvent(QPaintEvent*) = 0;
     virtual void keyPressEvent(QKeyEvent* event);
     virtual void paint_cell(QPainter& painter, int i, int j, Qt::GlobalColor c);
+    void draw_line(QPainter& painter);
 
     virtual unsigned short get_kgrid_size();
     virtual unsigned short get_kcell_size();

@@ -15,6 +15,7 @@
 #include <QVBoxLayout>
 #include <QApplication>
 #include "cellular/grid_cellular.h"
+#include "animal/grid_animal.h"
 
 class Menu : public QWidget
 {
@@ -25,11 +26,14 @@ public:
 
 public slots:
     void handle_cellular();
+    void handle_animal();
 
 private:
-    QPushButton b_;
+    QPushButton b_cellular_;
+    QPushButton b_animal_;
     QVBoxLayout layout_;
-    GridCellular g_;
+    GridCellular g_cellular_;
+    GridAnimal g_animal_;
 };
 
 #endif /* defined(__multi_agent_system__menu__) */

@@ -16,7 +16,17 @@
 
 class GridAnimal : public Grid
 {
+public:
+    GridAnimal();
+    virtual void paintEvent(QPaintEvent*);
 
+    virtual unsigned short get_kgrid_size();
+    virtual unsigned short get_kcell_size();
+    virtual unsigned short get_kwindows_size();
+
+private:
+    static constexpr unsigned short kgrid_size = 30;
+    static constexpr unsigned short kcell_size = 25;
 };
 
 #endif /* defined(__multi_agent_system__grid_animal__) */

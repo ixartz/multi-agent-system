@@ -9,7 +9,7 @@
 #include "grid_cellular.h"
 
 GridCellular::GridCellular()
-    : grid_(GridCellular::kgrid_size)
+    : grid_(get_kgrid_size())
 {
     for (int j = 0; j < get_kgrid_size(); ++j)
     {
@@ -29,7 +29,7 @@ void GridCellular::next_state()
     {
         for (int i = 0; i < get_kgrid_size(); ++i)
         {
-            calculate_neighbour(grid_[j][i], i, j);
+            calculate_neighbour_(grid_[j][i], i, j);
         }
     }
 
@@ -42,7 +42,7 @@ void GridCellular::next_state()
     }
 }
 
-void GridCellular::calculate_neighbour(Cell& c, int x, int y)
+void GridCellular::calculate_neighbour_(Cell& c, int x, int y)
 {
     c.get_neighbor().clear();
 
@@ -90,17 +90,7 @@ void GridCellular::paintEvent(QPaintEvent*)
 {
     QPainter painter(this);
 
-    for (int i = 1; i < get_kgrid_size(); ++i)
-    {
-        painter.fillRect(GridCellular::kcell_size * i - 1, 0,
-                         1, get_kwindows_size(), Qt::black);
-    }
-
-    for (int j = 1; j < get_kgrid_size(); ++j)
-    {
-        painter.fillRect(0, GridCellular::kcell_size * j - 1,
-                         get_kwindows_size(), 1, Qt::black);
-    }
+    draw_line(painter);
 
     for (int j = 0; j < get_kgrid_size(); ++j)
     {
@@ -129,8 +119,8 @@ void GridCellular::mousePressEvent(QMouseEvent* event)
 {
     if (event->buttons() == Qt::LeftButton)
     {
-        int i = event->pos().x() / kcell_size;
-        int j = event->pos().y() / kcell_size;
+        int i = event->pos().x() / get_kcell_size();
+        int j = event->pos().y() / get_kcell_size();
         grid_[j][i].inverse_state();
         update();
     }
