@@ -18,7 +18,7 @@ class GridCellular : public Grid
 {
 public:
     GridCellular();
-    void next_state();
+    virtual void next_state();
     void print();
     virtual void paintEvent(QPaintEvent*);
     virtual void keyPressEvent(QKeyEvent* event);

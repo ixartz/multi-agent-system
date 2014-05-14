@@ -16,7 +16,7 @@ void Grid::keyPressEvent(QKeyEvent* event)
     }
 }
 
-void Grid::paint_cell(QPainter& painter, int i, int j, Qt::GlobalColor c)
+void Grid::paint_cell(QPainter& painter, int i, int j, QBrush&& c)
 {
     painter.fillRect(get_kcell_size() * i, get_kcell_size() * j,
                      get_kcell_size() - 1, get_kcell_size() - 1,

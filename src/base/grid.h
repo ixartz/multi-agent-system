@@ -18,9 +18,10 @@
 class Grid : public QWidget
 {
 public:
+    virtual void next_state() = 0;
     virtual void paintEvent(QPaintEvent*) = 0;
     virtual void keyPressEvent(QKeyEvent* event);
-    virtual void paint_cell(QPainter& painter, int i, int j, Qt::GlobalColor c);
+    virtual void paint_cell(QPainter& painter, int i, int j, QBrush&& c);
     void draw_line(QPainter& painter);
 
     virtual unsigned short get_kgrid_size();
