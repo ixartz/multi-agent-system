@@ -10,16 +10,24 @@
 #define __multi_agent_system__grass__
 
 #include <iostream>
+#include <vector>
 
 class Grass
 {
 public:
-    Grass();
+    Grass(int x, int y);
     void change_state();
     unsigned int get_life();
 
+    std::vector<Grass*>& get_neighbor();
+    int get_x();
+    int get_y();
+
 private:
     unsigned int life_;
+    std::vector<Grass*> neighbor_;
+    int x_;
+    int y_;
 };
 
 #endif /* defined(__multi_agent_system__grass__) */

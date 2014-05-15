@@ -10,5 +10,21 @@
 #define __multi_agent_system__sheep__
 
 #include <iostream>
+#include "animal/grass.h"
+
+class Sheep
+{
+public:
+    Sheep(Grass* pos);
+
+    void move();
+    void eat();
+    void reproduce();
+
+    Grass* get_pos();
+
+private:
+    Grass* pos_;
+};
 
 #endif /* defined(__multi_agent_system__sheep__) */

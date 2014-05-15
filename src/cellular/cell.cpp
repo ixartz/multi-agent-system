@@ -26,7 +26,7 @@ void Cell::inverse_state()
 
 void Cell::change_state()
 {
-    long nb = count(neighbor_.begin(), neighbor_.end(), alive);
+    long nb = count(neighbor_state.begin(), neighbor_state.end(), alive);
 
     if (nb < 2)
     {
@@ -42,9 +42,9 @@ void Cell::change_state()
     }
 }
 
-std::vector<Cell::state>& Cell::get_neighbor()
+std::vector<Cell::state>& Cell::get_neighbor_state()
 {
-    return neighbor_;
+    return neighbor_state;
 }
 
 Cell::state Cell::get_state()

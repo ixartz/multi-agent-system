@@ -8,7 +8,8 @@
 
 #include "grass.h"
 
-Grass::Grass()
+Grass::Grass(int x, int y)
+    : x_(x), y_(y)
 {
     life_ = rand() % 10;
 }
@@ -22,4 +23,19 @@ void Grass::change_state()
 unsigned int Grass::get_life()
 {
     return life_;
+}
+
+std::vector<Grass*>& Grass::get_neighbor()
+{
+    return neighbor_;
+}
+
+int Grass::get_x()
+{
+    return x_;
+}
+
+int Grass::get_y()
+{
+    return y_;
 }

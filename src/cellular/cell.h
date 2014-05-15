@@ -24,11 +24,11 @@ public:
     Cell();
     void inverse_state();
     void change_state();
-    std::vector<Cell::state>& get_neighbor();
+    std::vector<Cell::state>& get_neighbor_state();
     Cell::state get_state();
 
 private:
-    std::vector<Cell::state> neighbor_;
+    std::vector<Cell::state> neighbor_state;
     state state_;
 };
 

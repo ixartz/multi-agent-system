@@ -29,7 +29,7 @@ void GridCellular::next_state()
     {
         for (int i = 0; i < get_kgrid_size(); ++i)
         {
-            calculate_neighbour_(grid_[j][i], i, j);
+            calculate_neighbour_state_(grid_[j][i], i, j);
         }
     }
 
@@ -42,9 +42,9 @@ void GridCellular::next_state()
     }
 }
 
-void GridCellular::calculate_neighbour_(Cell& c, int x, int y)
+void GridCellular::calculate_neighbour_state_(Cell& c, int x, int y)
 {
-    c.get_neighbor().clear();
+    c.get_neighbor_state().clear();
 
     for (int j = -1; j <= 1; ++j)
     {
@@ -54,7 +54,8 @@ void GridCellular::calculate_neighbour_(Cell& c, int x, int y)
                 (x + i >= 0 && x + i < get_kgrid_size() &&
                  y + j >= 0 && y + j < get_kgrid_size()))
             {
-                c.get_neighbor().push_back(grid_[y + j][x + i].get_state());
+                c.get_neighbor_state()
+                 .push_back(grid_[y + j][x + i].get_state());
             }
         }
     }
