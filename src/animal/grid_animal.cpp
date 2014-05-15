@@ -52,10 +52,14 @@ void GridAnimal::next_state()
         }
     }
 
-    for (int i = 0; i < knb_sheep; ++i)
-    {
-        animal_vec_[i].move();
-    }
+    animal_vec_.erase(std::remove_if(animal_vec_.begin(),
+                                     animal_vec_.end(),
+                                     [] (Sheep& s)
+                                     {
+                                         return !s.move();
+                                     }),
+                      animal_vec_.end());
+
 }
 
 void GridAnimal::paintEvent(QPaintEvent*)
@@ -73,11 +77,11 @@ void GridAnimal::paintEvent(QPaintEvent*)
         }
     }
 
-    for (int i = 0; i < knb_sheep; ++i)
+    for (auto it = animal_vec_.begin();
+         it != animal_vec_.end(); ++it)
     {
-        paint_cell(painter, animal_vec_[i].get_pos()->get_x(),
-                   animal_vec_[i].get_pos()->get_y(),
-                   Qt::red);
+        paint_cell(painter, it->get_pos()->get_x(),
+                   it->get_pos()->get_y(), Qt::red);
     }
 }
 

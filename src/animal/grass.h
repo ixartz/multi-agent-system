@@ -18,6 +18,7 @@ public:
     Grass(int x, int y);
     void change_state();
     unsigned int get_life();
+    bool is_eaten();
 
     std::vector<Grass*>& get_neighbor();
     int get_x();

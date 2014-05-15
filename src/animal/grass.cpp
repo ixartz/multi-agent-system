@@ -16,13 +16,27 @@ Grass::Grass(int x, int y)
 
 void Grass::change_state()
 {
-    if (life_ < 10)
+    /* Grass grow up one time out of five */
+    if (life_ < 10 && !(rand() % 2))
         ++life_;
 }
 
 unsigned int Grass::get_life()
 {
     return life_;
+}
+
+bool Grass::is_eaten()
+{
+    if (life_ == 10)
+    {
+        life_ = 0;
+        return true;
+    }
+    else
+    {
+        return false;
+    }
 }
 
 std::vector<Grass*>& Grass::get_neighbor()
